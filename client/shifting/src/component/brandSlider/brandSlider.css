@@ -1,0 +1,23 @@
+
+.brand-track {
+  display: flex;
+  gap: 3rem;
+  width: max-content;
+  animation: scroll 25s linear infinite;
+}
+
+.brand-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 140px;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
