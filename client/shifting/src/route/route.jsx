@@ -4,6 +4,8 @@ import Home from "../pages/home/Home";
 import AuthLayouts from "../layouts/AuthLayouts";
 import Auth from "../pages/auth/login/Login";
 import LoginPage from "../pages/auth/login/Login";
+import RegistrationPage from "../pages/auth/registration/Registration";
+import PrivateRoute from "../routes/PrivateRoute";
 
 
 const router = createBrowserRouter([
@@ -25,7 +27,15 @@ const router = createBrowserRouter([
       {
         path: 'login',
         Component: LoginPage
-      }
+      },
+      {
+        path: 'register',
+        Component: RegistrationPage
+      },
+      // {
+      //   path: 'auth',
+      //   Component: <PrivateRoute><Auth /></PrivateRoute>
+      // }
     ]
   }
 ]);

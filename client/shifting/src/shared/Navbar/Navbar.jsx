@@ -1,6 +1,17 @@
 import { NavLink } from "react-router";
+import useAuth from "../../hooks/useAuth";
 
 export default function Navbar() {
+    const { user, userSignOut } = useAuth()
+    const handleSignOut = function () {
+        userSignOut()
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
     return (
         <div className="navbar bg-base-100 shadow-sm">
             <div className="navbar-start">
@@ -24,7 +35,9 @@ export default function Navbar() {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                {user ? <Button onClick={handleSignOut} className="btn">SignOut</Button> :
+                    <NavLink to="/login" className="btn">Login</NavLink>
+                }
             </div>
         </div>
     )
