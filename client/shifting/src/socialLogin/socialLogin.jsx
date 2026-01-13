@@ -1,5 +1,6 @@
 import React, { use } from 'react'
 import useAuth from '../hooks/useAuth'
+import { useNavigate } from 'react-router'
 
 export default function SocialLogin() {
     const {signInWithGoogle} = useAuth()

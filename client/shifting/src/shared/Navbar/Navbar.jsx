@@ -24,6 +24,10 @@ export default function Navbar() {
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                         <li><NavLink to="/">Home</NavLink></li>
                         <li><NavLink to="/contact">Contact</NavLink></li>
+                        <li><NavLink to="/coverage">Coverage</NavLink></li>
+                        <li>
+                            <NavLink to="/send-parcel">Send A Parcel</NavLink>
+                        </li>
                     </ul>
                 </div>
                 <a className="btn btn-ghost text-xl">daisyUI</a>
@@ -32,10 +36,12 @@ export default function Navbar() {
                 <ul className="menu menu-horizontal px-1">
                     <li><NavLink to="/">Home</NavLink></li>
                     <li><NavLink to="/contact">Contact</NavLink></li>
+                    <li><NavLink to="/coverage">Coverage</NavLink></li>
+                    <li><NavLink to="/send-parcel">Send A Parcel</NavLink></li>
                 </ul>
             </div>
             <div className="navbar-end">
-                {user ? <Button onClick={handleSignOut} className="btn">SignOut</Button> :
+                {user ? <button onClick={handleSignOut} className="btn">SignOut</button> :
                     <NavLink to="/login" className="btn">Login</NavLink>
                 }
             </div>

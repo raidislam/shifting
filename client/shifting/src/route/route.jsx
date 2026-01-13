@@ -6,6 +6,9 @@ import Auth from "../pages/auth/login/Login";
 import LoginPage from "../pages/auth/login/Login";
 import RegistrationPage from "../pages/auth/registration/Registration";
 import PrivateRoute from "../routes/PrivateRoute";
+import Contact from "../pages/contact/contact";
+import Coverage from "../pages/coverage/coverage";
+import SendParcel from "../pages/sendParcel/sendparcel";
 
 
 const router = createBrowserRouter([
@@ -17,6 +20,19 @@ const router = createBrowserRouter([
       {
         index: true,
         Component: Home
+      },
+      {
+        path: 'contact',
+        Component: Contact
+      },
+      {
+        path: 'coverage',
+        Component: Coverage,
+        loader: () => fetch('./branches.json')
+      },
+      {
+        path: "send-parcel",
+        element: <PrivateRoute><SendParcel /></PrivateRoute>
       }
     ]
   },
