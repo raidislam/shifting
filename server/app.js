@@ -8,6 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.use("/api/v1/orders",require("./routes/order.routes"));
 
 
 // Healcth check
