@@ -7,6 +7,16 @@ function allParcelCol() {
   return parcelsCollection;
 }
 
+exports.createParcel = async (data)=>{
+    try{
+        const parcel = await allParcelCol().insertOne(data)
+        return parcel;
+        
+    }catch(err){
+        console.log(err)
+    }
+}
+
 exports.getAllParcel = async () => {
   try {
     const data = await allParcelCol().find().toArray();
@@ -16,10 +26,25 @@ exports.getAllParcel = async () => {
   }
 };
 
-exports.getParcelById = async(id)=>{
+exports.getParcelById = async(id,options)=>{
     try{
         const parcel = await allParcelCol().findOne({_id: new ObjectId(id)})
         if(!parcel) throw new Error('Parcel not found');
+        return parcel;
+    }catch(err){
+        console.log(err);
+    }
+}
+
+exports.getParcelByEmail = async(email)=>{
+    try{
+        const query = email ? {"created_by.email":email} : {};
+        const options = {
+            sort:{
+                created_at:-1
+            }
+        }
+        const parcel = await allParcelCol().find(query,options).toArray();
         return parcel;
     }catch(err){
         console.log(err);
