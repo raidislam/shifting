@@ -25,9 +25,8 @@ export default function Navbar() {
                         <li><NavLink to="/">Home</NavLink></li>
                         <li><NavLink to="/contact">Contact</NavLink></li>
                         <li><NavLink to="/coverage">Coverage</NavLink></li>
-                        <li>
-                            <NavLink to="/send-parcel">Send A Parcel</NavLink>
-                        </li>
+                        <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+                        <li><NavLink to="/send-parcel">Send A Parcel</NavLink></li>
                     </ul>
                 </div>
                 <a className="btn btn-ghost text-xl">daisyUI</a>
@@ -37,6 +36,10 @@ export default function Navbar() {
                     <li><NavLink to="/">Home</NavLink></li>
                     <li><NavLink to="/contact">Contact</NavLink></li>
                     <li><NavLink to="/coverage">Coverage</NavLink></li>
+                    {
+                        user && <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+                    }
+
                     <li><NavLink to="/send-parcel">Send A Parcel</NavLink></li>
                 </ul>
             </div>

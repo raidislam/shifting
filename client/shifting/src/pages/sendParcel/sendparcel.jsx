@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 
 function getCostBreakdown({ parcelType, pickupCenter, deliveryCenter, weight }) {
@@ -67,7 +68,8 @@ function getCostBreakdown({ parcelType, pickupCenter, deliveryCenter, weight }) 
 export default function ParcelCreateForm({ currentUserName = "", branches = [], currentUserEmail = "" }) {
     const [isSaving, setIsSaving] = useState(false);
     const serviceCenterList = useLoaderData();
-    const {user} = useAuth()
+    const { user } = useAuth()
+    const axiosSecure = useAxiosSecure();
 
     const {
         register,
@@ -265,24 +267,28 @@ export default function ParcelCreateForm({ currentUserName = "", branches = [], 
                 },
             });
 
-            const res = await fetch("/api/parcels", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
-            });
+            const res = await axiosSecure.post("/api/v1/orders/order-parcels", payload)
+                .then(res => {
+                    console.log(res)
+                    if (res.data.ok) {
+                        Swal.fire({
+                            title: "Redirecting...",
+                            text: "Please wait while we redirect you to the payment page.",
+                            html: `<p><b>Cost:</b> ৳${dataWithCost.cost}</p>`,
+                            icon: "success",
+                            confirmButtonText: "OK",
+                            timer: 1000,
+                            confirmButtonColor: "#16a34a",
+                        });
+                    }
+                })
 
-            if (!res.ok) {
+            if (!res.data.ok) {
                 const text = await res.text();
                 throw new Error(text || "Server error");
             }
 
-            Swal.fire({
-                title: "Saved ✅",
-                html: `<p><b>Cost:</b> ৳${dataWithCost.cost}</p>`,
-                icon: "success",
-                confirmButtonText: "OK",
-                confirmButtonColor: "#16a34a",
-            });
+
 
             reset({
                 senderName: currentUserName,
